@@ -1,14 +1,14 @@
 import React from "react";
 import GlobalStyles from "./assets/styles";
-import Root from "./pages";
+import Main from "./pages";
 
-const App = () => {
+const Root = () => {
   return (
     <>
       <GlobalStyles />
-      <Root />
+      <Main />
     </>
   );
 };
 
-export default App;
+export default Root;

@@ -21,7 +21,7 @@ const MainRoute = ({ component: Component, ...rest }) => {
   );
 };
 
-const Root = () => {
+const Main = () => {
   const { state, actions } = useAppState();
   return (
     <Router basename="/">
@@ -38,4 +38,4 @@ const Root = () => {
   );
 };
 
-export default Root;
+export default Main;
