@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.tampan.pokemon",
+      "sha256_cert_fingerprints": [
+        "D6:8C:88:B4:A2:A6:5D:04:82:48:04:20:DB:DE:A4:F3:89:B0:EF:8A:D7:4E:3A:BF:68:1B:D3:CB:42:35:61:5C"
+      ]
+    }
+  }
+]
