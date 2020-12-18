@@ -1,6 +1,7 @@
 import React from "react";
 import Modal from "../../components/modal";
 import { Container, Content, Button, Image } from "./style";
+import ImgSadPikachu from "../../assets/images/sad_pikachu.png";
 
 const AlertFailed = ({ isOpen, onClose }) => {
   return (
@@ -10,15 +11,12 @@ const AlertFailed = ({ isOpen, onClose }) => {
       isOpen={isOpen}
       maxHeight="70vh"
       contentStyle={{
-        maxWidth: "296px"
+        maxWidth: "296px",
       }}
     >
       <Container>
         <Content>
-          <Image
-            alt="pokemon-tampan"
-            src={require("../../assets/images/sad_pikachu.png")}
-          />
+          <Image alt="pokemon-tampan" src={ImgSadPikachu} />
           You are not succesfull catch it. Try Again!
         </Content>
         <Button onClick={onClose}>Close</Button>

@@ -5,6 +5,7 @@ import { Content, Card, OverlayLayout, Remove } from "./style";
 import { Row, Column } from "../../components/grid";
 import { capitalizeFirstLetter } from "../../utils/helper";
 import { useAppContext } from "../../context/app-state";
+import ImgEmpty from "../../assets/images/no_img.png";
 
 const Pokemon = memo(({ data, onClick, owned, remove, onRemove }) => {
   const [isHover, setIsHover] = useState(false);
@@ -21,7 +22,7 @@ const Pokemon = memo(({ data, onClick, owned, remove, onRemove }) => {
           {capitalizeFirstLetter(data.nickname || data.name)}
         </Card.Title>
 
-        {data.types.map(item => (
+        {data.types.map((item) => (
           <Card.Label key={uniqid()}>
             {capitalizeFirstLetter(item.type.name)}
           </Card.Label>
@@ -31,10 +32,7 @@ const Pokemon = memo(({ data, onClick, owned, remove, onRemove }) => {
           <Card.Image
             alt="pokemon-tampan"
             owned={owned > 0}
-            src={
-              data.sprites.front_default ||
-              require("../../assets/images/no_img.png")
-            }
+            src={data.sprites.front_default || ImgEmpty}
           />
         </Card.ImageContainer>
         {!remove && <Card.Info>Owned {owned}</Card.Info>}
@@ -56,30 +54,30 @@ const PokemonCard = memo(({ data, remove = false }) => {
   const { state, actions } = useAppContext();
 
   const onClick = useCallback(
-    id => () => {
+    (id) => () => {
       history.push(`/pokemon/${id}`);
     },
     [history]
   );
 
-  const onRemove = id => e => {
+  const onRemove = (id) => (e) => {
     e.preventDefault();
     const data = Object.assign([], state.myPokemon);
-    const newData = data.filter(item => item._id !== id);
+    const newData = data.filter((item) => item._id !== id);
     actions.setMyPokemon(newData);
   };
 
-  const pokemonOwned = id => {
+  const pokemonOwned = (id) => {
     const data = Object.assign([], state.myPokemon);
     return data.length
-      ? data.filter(item => item._id === id || item.id === id).length
+      ? data.filter((item) => item._id === id || item.id === id).length
       : 0;
   };
 
   return (
     <Content>
       <Row>
-        {data.map(pokemon => (
+        {data.map((pokemon) => (
           <Pokemon
             key={uniqid()}
             data={pokemon}

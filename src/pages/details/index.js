@@ -15,7 +15,7 @@ import {
   ImageBackgroundContainer,
   ImageBackground,
   DetailContainer,
-  DetailContent
+  DetailContent,
 } from "./style";
 import { createResourceDetailsPage } from "../../services/pokemon";
 import { capitalizeFirstLetter } from "../../utils/helper";
@@ -23,6 +23,10 @@ import { useAppContext } from "../../context/app-state";
 import AlertFailed from "../../components/alert-failed";
 import AlertSuccess from "../../components/alert-success";
 import { Loader1 } from "../../components/loader";
+import BgParticle from "../../assets/images/bg_particle.png";
+import IcReturn from "../../assets/images/ic_return.svg";
+import ImgLoading from "../../assets/images/loading_3.gif";
+import ImgEmpty from "../../assets/images/no_img.png";
 
 const Content = ({ resource, state, actions }) => {
   const pokemon = resource.pokemonById.read();
@@ -50,7 +54,7 @@ const Content = ({ resource, state, actions }) => {
     }, 3000);
   };
 
-  const onSave = nickname => {
+  const onSave = (nickname) => {
     setSuccessAlert(false);
     const data = Object.assign({}, pokemon);
     const { id, name, sprites, types } = data;
@@ -60,7 +64,7 @@ const Content = ({ resource, state, actions }) => {
       nickname,
       name,
       sprites,
-      types
+      types,
     };
     setMyPokemon([newData, ...myPokemon]);
     setTimeout(() => {
@@ -71,17 +75,10 @@ const Content = ({ resource, state, actions }) => {
   return (
     <ContentContainer>
       <ImageBackgroundContainer>
-        <ImageBackground
-          alt="pokemon-tampan"
-          src={require("../../assets/images/bg_particle.png")}
-        />
+        <ImageBackground alt="pokemon-tampan" src={BgParticle} />
       </ImageBackgroundContainer>
       <Header>
-        <Back
-          alt="pokemon-tampan"
-          onClick={onBack}
-          src={require("../../assets/images/ic_return.svg")}
-        />
+        <Back alt="pokemon-tampan" onClick={onBack} src={IcReturn} />
         <AlertFailed
           isOpen={failedAlert}
           onClose={() => setFailedAlert(false)}
@@ -97,12 +94,11 @@ const Content = ({ resource, state, actions }) => {
           <Image
             alt="pokemon-tampan"
             isLoading={isCatching}
-            owned={myPokemon.find(item => item.id === pokemon.id)}
+            owned={myPokemon.find((item) => item.id === pokemon.id)}
             src={
               isCatching
-                ? require("../../assets/images/loading_3.gif")
-                : pokemon.sprites.front_default ||
-                  require("../../assets/images/no_img.png")
+                ? ImgLoading
+                : pokemon.sprites.front_default || ImgEmpty
             }
           />
           <Title>{capitalizeFirstLetter(pokemon.name)}</Title>
@@ -110,10 +106,10 @@ const Content = ({ resource, state, actions }) => {
             style={{
               display: "flex",
               flexDirection: "row",
-              margin: "0px 24px"
+              margin: "0px 24px",
             }}
           >
-            {pokemon.types.map(item => (
+            {pokemon.types.map((item) => (
               <Label key={item.slot}>
                 {capitalizeFirstLetter(item.type.name)}
               </Label>
